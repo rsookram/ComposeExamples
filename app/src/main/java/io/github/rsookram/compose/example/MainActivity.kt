@@ -1,6 +1,7 @@
 package io.github.rsookram.compose.example
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.Text
 import androidx.compose.material.MaterialTheme
@@ -13,6 +14,9 @@ import io.github.rsookram.compose.example.ui.AppTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d("MainActivity", "onCreate called for activity $this")
+
         setContent {
             AppTheme {
                 Surface(color = MaterialTheme.colors.background) {
