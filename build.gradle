@@ -1,6 +1,7 @@
 buildscript {
     ext {
-        compose_version = '1.0.0-alpha01'
+        // TODO: Try alpha02 for Configuration recomposition bug
+        compose_version = '1.0.0-SNAPSHOT'
     }
     repositories {
         google()
@@ -14,6 +15,7 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://androidx.dev/snapshots/builds/6798052/artifacts/ui/repository' }
         google()
         jcenter()
     }
