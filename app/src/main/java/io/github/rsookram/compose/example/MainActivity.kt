@@ -7,10 +7,13 @@ import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Box
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -20,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ConfigurationAmbient
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import io.github.rsookram.compose.example.ui.AppTheme
 
@@ -32,6 +36,7 @@ class MainActivity : ComponentActivity() {
         val examples: List<@Composable () -> Unit> = listOf(
             { FontScale() },
             { Locale() },
+            { UiMode() },
         )
 
         val currentIndex = mutableStateOf(0)
@@ -98,6 +103,23 @@ fun localizedString(@StringRes id: Int): String {
 @Composable
 fun LocalePreview() = AppTheme {
     Locale()
+}
+
+@Composable
+fun UiMode() {
+    val text = if (isSystemInDarkTheme()) "Dark" else "Light"
+
+    // Increasing the elevation so that the colour difference is more
+    // noticeable in dark mode
+    Card(Modifier.padding(16.dp), elevation = 4.dp) {
+        Text(text, Modifier.padding(16.dp))
+    }
+}
+
+@Preview
+@Composable
+fun UiModePreview() = AppTheme {
+    UiMode()
 }
 
 @Composable
