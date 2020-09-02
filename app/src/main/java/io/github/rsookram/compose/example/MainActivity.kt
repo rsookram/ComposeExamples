@@ -20,6 +20,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.WithConstraints
 import androidx.compose.ui.platform.ConfigurationAmbient
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.setContent
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
             { FontScale() },
             { Locale() },
             { UiMode() },
+            { ScreenSize() },
         )
 
         val currentIndex = mutableStateOf(0)
@@ -120,6 +122,27 @@ fun UiMode() {
 @Composable
 fun UiModePreview() = AppTheme {
     UiMode()
+}
+
+@Composable
+fun ScreenSize() {
+    WithConstraints {
+        if (maxHeight > 400.dp) {
+            Column {
+                repeat(4) {
+                    Text("Big $maxHeight")
+                }
+            }
+        } else {
+            Text("Small $maxHeight")
+        }
+    }
+}
+
+@Preview
+@Composable
+fun ScreenSizePreview() = AppTheme {
+    ScreenSize()
 }
 
 @Composable
