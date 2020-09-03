@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.Card
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -262,9 +261,7 @@ fun ExampleContainerPreview() = AppTheme {
         totalCount = 5,
         onNextClick = {},
         onPreviousClick = {},
-    ) {
-        Box(Modifier.size(48.dp), backgroundColor = MaterialTheme.colors.primary)
-    }
+    ) {}
 }
 
 @Preview(widthDp = 360, heightDp = 128)
@@ -275,9 +272,7 @@ fun ExampleContainerFirstPagePreview() = AppTheme {
         totalCount = 5,
         onNextClick = {},
         onPreviousClick = null,
-    ) {
-        Box(Modifier.size(48.dp), backgroundColor = MaterialTheme.colors.primary)
-    }
+    ) {}
 }
 
 @Preview(widthDp = 360, heightDp = 128)
@@ -288,7 +283,5 @@ fun ExampleContainerLastPagePreview() = AppTheme {
         totalCount = 5,
         onNextClick = null,
         onPreviousClick = {},
-    ) {
-        Box(Modifier.size(48.dp), backgroundColor = MaterialTheme.colors.primary)
-    }
+    ) {}
 }
