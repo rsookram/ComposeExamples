@@ -39,6 +39,7 @@ class MainActivity : ComponentActivity() {
             { Locale() },
             { UiMode() },
             { ScreenSize() },
+            { Orientation() },
         )
 
         val currentIndex = mutableStateOf(0)
@@ -143,6 +144,39 @@ fun ScreenSize() {
 @Composable
 fun ScreenSizePreview() = AppTheme {
     ScreenSize()
+}
+
+@Composable
+fun Orientation() {
+    val isPortrait = ConfigurationAmbient.current.orientation == Configuration.ORIENTATION_PORTRAIT
+
+    if (isPortrait) {
+        Column {
+            Card(Modifier.padding(16.dp)) {
+                Text("portrait", Modifier.padding(16.dp))
+            }
+
+            Card(Modifier.padding(16.dp)) {
+                Text("portrait", Modifier.padding(16.dp))
+            }
+        }
+    } else {
+        Row {
+            Card(Modifier.padding(16.dp)) {
+                Text("landscape", Modifier.padding(16.dp))
+            }
+
+            Card(Modifier.padding(16.dp)) {
+                Text("landscape", Modifier.padding(16.dp))
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun OrientationPreview() = AppTheme {
+    Orientation()
 }
 
 @Composable
