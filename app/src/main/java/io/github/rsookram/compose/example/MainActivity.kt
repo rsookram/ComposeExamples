@@ -6,24 +6,33 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Box
+import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
+import androidx.compose.foundation.contentColor
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Button
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.Card
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.WithConstraints
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ConfigurationAmbient
 import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
 import io.github.rsookram.compose.example.ui.AppTheme
@@ -190,20 +199,69 @@ fun ExampleContainer(
     Column {
         Box(Modifier.weight(1f), children = child)
 
-        Row {
-            if (onPreviousClick != null) {
-                Button(onClick = onPreviousClick) { Text("Previous") }
-            } else {
-                Spacer(Modifier.weight(1f))
+        Row(
+            Modifier.padding(16.dp),
+            Arrangement.SpaceBetween,
+            verticalGravity = Alignment.CenterVertically,
+        ) {
+            IconButton(onClick = onPreviousClick ?: {}, enabled = onPreviousClick != null) {
+                Icon(
+                    Icons.Default.ArrowBack,
+                    tint = if (onPreviousClick != null) contentColor() else Color.Transparent,
+                )
             }
 
-            Text("$currentIndex / $totalCount")
+            Text(
+                "$currentIndex / $totalCount",
+                Modifier.weight(1f),
+                textAlign = TextAlign.Center,
+            )
 
-            if (onNextClick != null) {
-                Button(onClick = onNextClick) { Text("Next") }
-            } else {
-                Spacer(Modifier.weight(1f))
+            IconButton(onClick = onNextClick ?: {}, enabled = onNextClick != null) {
+                Icon(
+                    Icons.Default.ArrowForward,
+                    tint = if (onNextClick != null) contentColor() else Color.Transparent,
+                )
             }
         }
+    }
+}
+
+@Preview(widthDp = 360, heightDp = 128)
+@Composable
+fun ExampleContainerPreview() = AppTheme {
+    ExampleContainer(
+        currentIndex = 2,
+        totalCount = 5,
+        onNextClick = {},
+        onPreviousClick = {},
+    ) {
+        Box(Modifier.size(48.dp), backgroundColor = MaterialTheme.colors.primary)
+    }
+}
+
+@Preview(widthDp = 360, heightDp = 128)
+@Composable
+fun ExampleContainerFirstPagePreview() = AppTheme {
+    ExampleContainer(
+        currentIndex = 1,
+        totalCount = 5,
+        onNextClick = {},
+        onPreviousClick = null,
+    ) {
+        Box(Modifier.size(48.dp), backgroundColor = MaterialTheme.colors.primary)
+    }
+}
+
+@Preview(widthDp = 360, heightDp = 128)
+@Composable
+fun ExampleContainerLastPagePreview() = AppTheme {
+    ExampleContainer(
+        currentIndex = 5,
+        totalCount = 5,
+        onNextClick = null,
+        onPreviousClick = {},
+    ) {
+        Box(Modifier.size(48.dp), backgroundColor = MaterialTheme.colors.primary)
     }
 }
