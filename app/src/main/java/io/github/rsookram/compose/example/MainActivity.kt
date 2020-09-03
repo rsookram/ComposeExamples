@@ -3,6 +3,7 @@ package io.github.rsookram.compose.example
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Box
@@ -38,31 +39,32 @@ import androidx.ui.tooling.preview.Preview
 import io.github.rsookram.compose.example.ui.AppTheme
 
 class MainActivity : ComponentActivity() {
+
+    private val examples: List<@Composable () -> Unit> = listOf(
+        { FontScale() },
+        { Locale() },
+        { UiMode() },
+        { ScreenSize() },
+        { Orientation() },
+    )
+
+    private val currentIndex = mutableStateOf(0)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         Log.d("MainActivity", "onCreate called for activity $this")
 
-        val examples: List<@Composable () -> Unit> = listOf(
-            { FontScale() },
-            { Locale() },
-            { UiMode() },
-            { ScreenSize() },
-            { Orientation() },
-        )
-
-        val currentIndex = mutableStateOf(0)
-
         setContent {
             AppTheme {
                 Surface(color = MaterialTheme.colors.background) {
-                    val onNextClick: (() -> Unit)? = if (currentIndex.value < examples.lastIndex) {
-                        { currentIndex.value++ }
+                    val onNextClick: (() -> Unit)? = if (hasNext()) {
+                        { goToNext() }
                     } else {
                         null
                     }
-                    val onPreviousClick: (() -> Unit)? = if (currentIndex.value > 0) {
-                        { currentIndex.value-- }
+                    val onPreviousClick: (() -> Unit)? = if (hasPrevious()) {
+                        { goToPrevious() }
                     } else {
                         null
                     }
@@ -79,6 +81,31 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    private fun hasNext() = currentIndex.value < examples.lastIndex
+
+    private fun goToNext() {
+        currentIndex.value++
+    }
+
+    private fun hasPrevious() = currentIndex.value > 0
+
+    private fun goToPrevious() {
+        currentIndex.value--
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean =
+        when (keyCode) {
+            KeyEvent.KEYCODE_DPAD_LEFT -> {
+                if (hasPrevious()) goToPrevious()
+                true
+            }
+            KeyEvent.KEYCODE_DPAD_RIGHT -> {
+                if (hasNext()) goToNext()
+                true
+            }
+            else -> super.onKeyUp(keyCode, event)
+        }
 }
 
 @Composable
