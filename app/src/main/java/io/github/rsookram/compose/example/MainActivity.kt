@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.KeyEvent
 import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
+import androidx.compose.animation.animate
 import androidx.compose.foundation.Box
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
@@ -256,7 +257,9 @@ fun ExampleContainer(
             IconButton(onClick = onPreviousClick ?: {}, enabled = onPreviousClick != null) {
                 Icon(
                     Icons.Default.ArrowBack,
-                    tint = if (onPreviousClick != null) contentColor() else Color.Transparent,
+                    tint = animate(
+                        if (onPreviousClick != null) contentColor() else Color.Transparent
+                    ),
                 )
             }
 
@@ -269,7 +272,9 @@ fun ExampleContainer(
             IconButton(onClick = onNextClick ?: {}, enabled = onNextClick != null) {
                 Icon(
                     Icons.Default.ArrowForward,
-                    tint = if (onNextClick != null) contentColor() else Color.Transparent,
+                    tint = animate(
+                        if (onNextClick != null) contentColor() else Color.Transparent
+                    ),
                 )
             }
         }
