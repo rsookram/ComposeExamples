@@ -112,9 +112,10 @@ fun FontScale() {
     Text("Configuration Changes in Compose")
 }
 
-@Preview
+@Preview(group = "fontScale")
+@Preview(group = "fontScale", fontScale = 2.0f)
 @Composable
-fun FontScalePreview() = AppTheme {
+private fun FontScalePreview() = AppTheme {
     FontScale()
 }
 
@@ -137,9 +138,11 @@ fun localizedString(@StringRes id: Int): String {
     return resources.getString(id)
 }
 
-@Preview
+// Setting locale is broken in 1.0.0-alpha02
+@Preview(group = "locale")
+@Preview(group = "locale", locale = "ja-JP")
 @Composable
-fun LocalePreview() = AppTheme {
+private fun LocalePreview() = AppTheme {
     Locale()
 }
 
@@ -154,10 +157,21 @@ fun UiMode() {
     }
 }
 
-@Preview
+@Preview(group = "uiMode")
 @Composable
-fun UiModePreview() = AppTheme {
+private fun UiModeLightPreview() = AppTheme {
     UiMode()
+}
+
+@Preview(group = "uiMode")
+@Composable
+private fun UiModeDarkPreview() {
+    // Hack. Ideally the uiMode parameter in @Preview should handle this
+    ConfigurationAmbient.current.uiMode = Configuration.UI_MODE_NIGHT_YES
+
+    AppTheme {
+        UiMode()
+    }
 }
 
 @Composable
@@ -175,9 +189,10 @@ fun ScreenSize() {
     }
 }
 
-@Preview
+@Preview(group = "screenSize")
+@Preview(group = "screenSize", heightDp = 410)
 @Composable
-fun ScreenSizePreview() = AppTheme {
+private fun ScreenSizePreview() = AppTheme {
     ScreenSize()
 }
 
@@ -208,9 +223,17 @@ fun Orientation() {
     }
 }
 
-@Preview
+@Preview(group = "orientation")
 @Composable
-fun OrientationPreview() = AppTheme {
+private fun OrientationPortraitPreview() = AppTheme {
+    Orientation()
+}
+
+@Preview(group = "orientation")
+@Composable
+private fun OrientationLandscapePreview() = AppTheme {
+    ConfigurationAmbient.current.orientation = Configuration.ORIENTATION_LANDSCAPE
+
     Orientation()
 }
 
@@ -253,9 +276,9 @@ fun ExampleContainer(
     }
 }
 
-@Preview(widthDp = 360, heightDp = 128)
+@Preview(group = "exampleContainer", widthDp = 360, heightDp = 128)
 @Composable
-fun ExampleContainerPreview() = AppTheme {
+private fun ExampleContainerPreview() = AppTheme {
     ExampleContainer(
         currentIndex = 2,
         totalCount = 5,
@@ -264,9 +287,9 @@ fun ExampleContainerPreview() = AppTheme {
     ) {}
 }
 
-@Preview(widthDp = 360, heightDp = 128)
+@Preview(group = "exampleContainer", widthDp = 360, heightDp = 128)
 @Composable
-fun ExampleContainerFirstPagePreview() = AppTheme {
+private fun ExampleContainerFirstPagePreview() = AppTheme {
     ExampleContainer(
         currentIndex = 1,
         totalCount = 5,
@@ -275,9 +298,9 @@ fun ExampleContainerFirstPagePreview() = AppTheme {
     ) {}
 }
 
-@Preview(widthDp = 360, heightDp = 128)
+@Preview(group = "exampleContainer", widthDp = 360, heightDp = 128)
 @Composable
-fun ExampleContainerLastPagePreview() = AppTheme {
+private fun ExampleContainerLastPagePreview() = AppTheme {
     ExampleContainer(
         currentIndex = 5,
         totalCount = 5,
