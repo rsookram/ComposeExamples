@@ -11,7 +11,6 @@ import androidx.compose.foundation.Box
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.contentColor
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -149,7 +148,7 @@ private fun LocalePreview() = AppTheme {
 
 @Composable
 fun UiMode() {
-    val text = if (isSystemInDarkTheme()) "Dark" else "Light"
+    val text = if (MaterialTheme.colors.isLight) "Light" else "Dark"
 
     // Increasing the elevation so that the colour difference is more
     // noticeable in dark mode
