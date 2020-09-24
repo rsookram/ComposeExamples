@@ -251,7 +251,7 @@ fun ExampleContainer(
         Row(
             Modifier.padding(16.dp),
             Arrangement.SpaceBetween,
-            verticalGravity = Alignment.CenterVertically,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             IconButton(onClick = onPreviousClick ?: {}, enabled = onPreviousClick != null) {
                 Icon(
