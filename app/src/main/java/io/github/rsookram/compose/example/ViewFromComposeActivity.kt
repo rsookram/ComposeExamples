@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.TextView
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Column
+import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.setContent
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.viewinterop.AndroidViewBinding
@@ -16,14 +17,16 @@ class ViewFromComposeActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Column {
-                AndroidView(::TextView) { v ->
-                    v.text = "TextView from Compose"
-                }
+            MaterialTheme {
+                Column {
+                    AndroidView(::TextView) { v ->
+                        v.text = "TextView from Compose"
+                    }
 
-                AndroidViewBinding(ViewBindingExampleBinding::inflate) {
-                    startText.setOnClickListener {
-                        Log.d("ViewFromComposeActivity", "start text clicked")
+                    AndroidViewBinding(ViewBindingExampleBinding::inflate) {
+                        startText.setOnClickListener {
+                            Log.d("ViewFromComposeActivity", "start text clicked")
+                        }
                     }
                 }
             }
