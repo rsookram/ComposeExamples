@@ -7,11 +7,12 @@ import android.view.KeyEvent
 import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
 import androidx.compose.animation.animate
-import androidx.compose.foundation.Box
+import androidx.compose.foundation.AmbientContentColor
 import androidx.compose.foundation.Icon
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.contentColor
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
@@ -246,18 +247,19 @@ fun ExampleContainer(
     child: @Composable () -> Unit,
 ) {
     Column {
-        Box(Modifier.weight(1f), children = child)
+        Box(Modifier.weight(1f), children = { child() })
 
         Row(
             Modifier.padding(16.dp),
             Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            val contentColour = AmbientContentColor.current
             IconButton(onClick = onPreviousClick ?: {}, enabled = onPreviousClick != null) {
                 Icon(
                     Icons.Default.ArrowBack,
                     tint = animate(
-                        if (onPreviousClick != null) contentColor() else Color.Transparent
+                        if (onPreviousClick != null) contentColour else Color.Transparent
                     ),
                 )
             }
@@ -272,7 +274,7 @@ fun ExampleContainer(
                 Icon(
                     Icons.Default.ArrowForward,
                     tint = animate(
-                        if (onNextClick != null) contentColor() else Color.Transparent
+                        if (onNextClick != null) contentColour else Color.Transparent
                     ),
                 )
             }
