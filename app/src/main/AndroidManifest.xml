@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
+            android:label="Conf Changes"
             android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|uiMode|fontScale|locale|layoutDirection">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +20,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ComposeFromXmlActivity">
+        <activity
+            android:name=".ComposeFromXmlActivity"
+            android:label="C ← XML">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,7 +30,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ViewFromComposeActivity">
+        <activity
+            android:name=".ViewFromComposeActivity"
+            android:label="C ← View">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,7 +40,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ComposeIntegrationActivity">
+        <activity
+            android:name=".ComposeIntegrationActivity"
+            android:label="C Integrations">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
