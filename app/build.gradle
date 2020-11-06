@@ -49,5 +49,5 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
 
-    implementation "com.github.skydoves:landscapist-glide:1.0.7"
+    implementation "com.github.skydoves:landscapist-glide:1.0.8"
 }
