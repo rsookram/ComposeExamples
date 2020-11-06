@@ -14,7 +14,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.get
-import com.skydoves.landscapist.glide.GlideImage
+import dev.chrisbanes.accompanist.glide.GlideImage
 
 class ComposeIntegrationActivity : ComponentActivity() {
 
