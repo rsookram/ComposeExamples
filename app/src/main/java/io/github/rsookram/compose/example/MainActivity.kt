@@ -5,33 +5,31 @@ import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import androidx.activity.ComponentActivity
-import androidx.annotation.StringRes
 import androidx.compose.animation.animate
-import androidx.compose.foundation.AmbientContentColor
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.AmbientContentColor
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.WithConstraints
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.WithConstraints
 import androidx.compose.ui.platform.ConfigurationAmbient
-import androidx.compose.ui.platform.ContextAmbient
 import androidx.compose.ui.platform.setContent
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.ui.tooling.preview.Preview
@@ -121,21 +119,7 @@ private fun FontScalePreview() = AppTheme {
 
 @Composable
 fun Locale() {
-    Text(localizedString(R.string.android))
-}
-
-/**
- * Replacement for [androidx.compose.ui.res.stringResource] which handles
- * recomposing on [Configuration] changes (`stringResource` doesn't as of
- * 1.0.0-alpha01).
- *
- * https://issuetracker.google.com/issues/167352819
- */
-@Composable
-fun localizedString(@StringRes id: Int): String {
-    val context = ContextAmbient.current
-    val resources = remember(ConfigurationAmbient.current) { context.resources }
-    return resources.getString(id)
+    Text(stringResource(R.string.android))
 }
 
 // Setting locale is broken in 1.0.0-alpha02

@@ -2,10 +2,10 @@ package io.github.rsookram.compose.example
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.setContent

@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.AttributeSet
 import androidx.activity.ComponentActivity
-import androidx.compose.foundation.Text
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.AbstractComposeView
 import io.github.rsookram.compose.example.databinding.ActivityComposeFromXmlBinding
